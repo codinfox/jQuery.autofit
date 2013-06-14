@@ -2,18 +2,29 @@
  * jQuery plugin - auto fit the image to the frame
  * MIT licensed
  * Author: Ben
- *
+ * GitHub: https://github.com/codinfox/jQuery.autofit
  */
 ( function($) {
 
-        var setting = {
-            height : $(this).parent().height(),
-            width : $(this).parent().width(),
-            cut : true,
-        };
+        var setting;
 
         $.fn.autofit = function(options) {
-            settings = $.extend(setting, options);
+            setting = $.extend({
+                height : $(this).parent().height(),
+                width : $(this).parent().width(),
+                cut : true,
+                defaultConfig : false
+            }, options);
+            
+            if (setting.defaultConfig) {
+                $(this).css({
+                    position : "absolute"
+                });
+                $(this).parent().css({
+                    overflow : "hidden",
+                    position : "relative" 
+                });
+            }
             $(this).load(_autofit);
         }
         function _autofit() {
@@ -22,8 +33,11 @@
             var width = $(this).width();
 
             if (setting.cut && width >= setting.width && height >= setting.height) {
+                console.log("height: " + height + " width: " + width);
+                console.log("height: " + setting.height + " width: " + setting.width);
                 var offset_x = (width - setting.width) / 2;
                 var offset_y = (height - setting.height) / 2;
+                console.log("offset_x: " + offset_x + "offset_y: " + offset_y);
                 $(this).css({
                     left : "-" + offset_x + "px",
                     top : "-" + offset_y + "px"

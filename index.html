@@ -4,8 +4,16 @@
         <title>index</title>
         <script src="js/jquery_1_9_1.js"></script>
         <script src="js/jquery.autofit.js"></script>
+        <script>
+            $(document).ready(function() {
+                $("img").autofit({defaultConfig: true});
+            });
+        </script>
     </head>
 
     <body>
+        <div style="height: 480px; width: 320px;overflow:hidden;">
+            <img src="images/flag.jpg" />
+        </div>
     </body>
 </html>
